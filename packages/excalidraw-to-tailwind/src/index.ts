@@ -58,7 +58,7 @@ export const Options = z.object({
 type Options = z.infer<typeof Options>
 
 export async function runCommand(options: Options) {
-  options.base = options.base.endsWith('./')
+  options.base = options.base.startsWith('./')
     ? options.base
     : './' + options.base
   options.base += options.base.endsWith('/') ? '' : '/'
