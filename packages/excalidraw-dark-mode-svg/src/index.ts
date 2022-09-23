@@ -27,23 +27,19 @@ const writeToFile = (filename: string, content: string): Promise<void> => {
       reject(optimizedSvg.error)
       return
     }
-    fs.writeFile(
-      `${filename}.svg`,
-      (optimizedSvg as OptimizedSvg).data,
-      (err) => {
-        if (err) {
-          reject(err.message)
-        } else {
-          resolve()
-        }
+    fs.writeFile(filename, (optimizedSvg as OptimizedSvg).data, (err) => {
+      if (err) {
+        reject(err.message)
+      } else {
+        resolve()
       }
-    )
+    })
   })
 }
 
 const readFile = (filename: string): Promise<string> => {
   return new Promise((resolve, reject) => {
-    fs.readFile(`${filename}.svg`, (err, data) => {
+    fs.readFile(filename, (err, data) => {
       if (err) {
         reject(err.message)
       } else {
@@ -55,7 +51,8 @@ const readFile = (filename: string): Promise<string> => {
 
 export const Options = z.object({
   base: z.string().default('/'),
-  replace: z.array(z.string()).default([])
+  replace: z.array(z.string()).default([]),
+  suffix: z.string().default('')
 })
 
 type Options = z.infer<typeof Options>
@@ -67,10 +64,10 @@ export async function runCommand(options: Options) {
   if (path.endsWith('.svg')) {
     path = path.slice(0, -4)
   }
-  const svgCode = await readFile(resolve(path))
+  const svgCode = await readFile(resolve(path + '.svg'))
   const convertedSvg = convertToTw(removeDefs(removeBg(svgCode)))
+  const outputFile = path + options.suffix + '.svg'
+  await writeToFile(outputFile, convertedSvg)
 
-  await writeToFile(path + '-tw', convertedSvg)
-
-  consola.success(`Created new file - ${path}`)
+  consola.success(`Created new file - ${outputFile}`)
 }

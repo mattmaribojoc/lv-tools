@@ -11,7 +11,8 @@ async function _main() {
 
   const formattedArgs = Options.parse({
     replace: args.replace,
-    base: args.base
+    base: args.base,
+    suffix: args.suffix
   })
   await runCommand(formattedArgs)
   return ''
