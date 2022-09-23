@@ -13,8 +13,9 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm ci
-      - run: npm run build
-      - run: npm run publish
+          scope: '@lv-tools'
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - run: yarn publish:ci
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

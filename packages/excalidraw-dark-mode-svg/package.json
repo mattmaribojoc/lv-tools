@@ -18,7 +18,7 @@
   "bin": "./bin/index.mjs",
   "scripts": {
     "prepack": "unbuild",
-    "publish": "npm publish --access public"
+    "publish:ci": "npm publish --access public"
   },
   "dependencies": {
     "consola": "^2.15.3",
