@@ -5,7 +5,7 @@ interface Replace {
 const replaceKeys = [
   {
     find: /fill="#000000"|fill="#ffffff"/g,
-    replace: 'fill-white dark:fill-black'
+    replace: 'fill-black dark:fill-white'
   },
   {
     find: /stroke="#ffffff"|stroke="#000000"/g,
