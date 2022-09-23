@@ -50,7 +50,7 @@ const readFile = (filename: string): Promise<string> => {
 }
 
 export const Options = z.object({
-  base: z.string().default('/'),
+  base: z.string().default('./'),
   replace: z.array(z.string()).default([]),
   suffix: z.string().default('')
 })
@@ -58,9 +58,14 @@ export const Options = z.object({
 type Options = z.infer<typeof Options>
 
 export async function runCommand(options: Options) {
+  options.base = options.base.endsWith('./')
+    ? options.base
+    : './' + options.base
+  options.base += options.base.endsWith('/') ? '' : '/'
+
   consola.log(`Let's convert your excalidraw image in ${options.base}`)
   consola.log(`? What's the name of your file'`)
-  let path = options.base + '/' + (await ask())
+  let path = options.base + (await ask())
   if (path.endsWith('.svg')) {
     path = path.slice(0, -4)
   }
