@@ -11,7 +11,7 @@
     "dev": {
       "cache": false
     },
-    "publish": {
+    "publish:ci": {
       "dependsOn": ["^build"]
     }
   }
