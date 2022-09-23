@@ -1,6 +1,6 @@
 {
   "name": "@lv-tools/excalidraw-to-tailwind",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Converts excalidraw svg to use tailwind classes as well as support dark mode",
   "author": "Matt Maribojoc <matt@learnvue.co>",
   "type": "module",
@@ -17,7 +17,8 @@
   "license": "MIT",
   "bin": "./bin/index.mjs",
   "scripts": {
-    "prepack": "unbuild"
+    "prepack": "unbuild",
+    "publish": "npm publish --access public"
   },
   "dependencies": {
     "consola": "^2.15.3",
