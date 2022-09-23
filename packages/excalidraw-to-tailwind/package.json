@@ -20,7 +20,7 @@
     "prepack": "unbuild",
     "publish:ci": "npm publish --access public"
   },
-  "devDependencies": {
+  "dependencies": {
     "consola": "^2.15.3",
     "vitest": "^0.23.4",
     "zod": "^3.19.1",
